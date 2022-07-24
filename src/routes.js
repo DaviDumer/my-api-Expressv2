@@ -2,20 +2,43 @@ const express = require('express');
 const app = express();
 const bodyParse = require('body-parser');
 const fs = require('fs');
+const userDataBase = require('./database/usersDataBase');
 
 const port = 3001; 
 
 app.use(bodyParse.urlencoded({extended: true})); // Converte a recsição em um objeto.
-app.use(bodyParse.json())
+app.use(bodyParse.json());
 
 app.get('/', (request, response, next) => {
-  console.log(request);
-  fs.writeFileSync(__dirname + "/Recsicao do google chome.http", JSON.stringify(request), (err) => {
-    console.log(err || 'Request salva com sucesso!');
-  })
-  response.send('<h1>Sucsses!</h1>').status(200);
+  response.send(fs.readFileSync(__dirname + '/view/index.html', 'utf-8' )).status(200);
+});
+
+app.get('/users', (request, response, next) => {
+  const users = userDataBase.getUsers();
+  response.send(JSON.stringify(users)).status(200);
+});
+
+app.get('/user/:id', (request, response, next) => {
+  const user = userDataBase.getUser(request.params.id);
+  response.send(JSON.stringify(user)).status(200);
+});
+
+app.post('/user', (request, response, next) => {
+  const user = request.body;
+  userDataBase.setUser(user);
+  response.send("Success!").status(200);
+})
+
+app.put('/user', (request, response, next) => {
+  const user = userDataBase.putUser(request.body);
+  response.send("Success!").status(200);
+});
+
+app.delete('/user', (request, response, next) => {
+  const user = userDataBase.deleteUser(request.body.id);
+  response.send(user).status(200);
 })
 
 app.listen(port,() => {
   console.log(`Servidor startado na porta ${port}...`);
-})
+});
