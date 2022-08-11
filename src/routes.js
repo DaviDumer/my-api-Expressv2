@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const bodyParse = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
 const userDataBase = require('./database/usersDataBase');
