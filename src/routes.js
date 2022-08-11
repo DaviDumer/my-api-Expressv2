@@ -22,12 +22,14 @@ app.get('/', (request, response, next) => {
 
 app.get('/users', (request, response, next) => {
   const users = userDataBase.getUsers();
-  response.send(JSON.stringify(users)).status(200);
+  console.log(users);
+  response.json(users).status(200);
 });
 
 app.get('/user/:id', (request, response, next) => {
   const user = userDataBase.getUser(request.params.id);
-  response.send(JSON.stringify(user)).status(200);
+  // response.send(JSON.stringify(user)).status(200);
+  response.json(user).status(200);
 });
 
 app.post('/user', (request, response, next) => {
@@ -44,7 +46,7 @@ app.put('/user', (request, response, next) => {
 
 app.delete('/user', (request, response, next) => {
   const user = userDataBase.deleteUser(request.body.id);
-  response.send(user).status(200);
+  response.json(user).status(200);
 })
 
 app.listen(port,() => {

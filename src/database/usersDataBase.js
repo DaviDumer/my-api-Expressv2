@@ -1,10 +1,24 @@
 const users = {
   1: {
     id: 1,
-    name: "Nome do Usuario",
-    lastName: "segundo nome",
+    name: "usuario1",
+    lastName: "segundo nome1",
     email: "email@test.com",
-    password: "654321" 
+    password: "3146456" 
+  },
+  2: {
+    id: 2,
+    name: "usiario2",
+    lastName: "segundo nome2",
+    email: "email@test.com",
+    password: "98653134" 
+  },
+  3: {
+    id: 3,
+    name: "usuaria3",
+    lastName: "segundo nome3",
+    email: "email@test.com",
+    password: "987643" 
   }
 };
 
