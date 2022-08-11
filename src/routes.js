@@ -7,7 +7,7 @@ const userDataBase = require('./database/usersDataBase');
 const port = process.env.PORT || 3001;
 
 app.use((req, res, next) => { // Faz a liperação do cors, de endereços diferentes.
-  res.header("Access-Control-Allow-Origin", ["http://localhost:3000"])
+  res.header("Access-Control-Allow-Origin", ["http://localhost:3000", "https://my-api-express.herokuapp.com/"])
   res.header("Access-Control-Allow-Methods", ['GET','PUT','POST','DELETE'])
   app.use(cors())
   next()
