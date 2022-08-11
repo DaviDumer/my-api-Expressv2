@@ -4,7 +4,7 @@ const cors = require('cors');
 const fs = require('fs');
 const userDataBase = require('./database/usersDataBase');
 
-const port = process.env.PORT || 3001; 
+const port = process.env.PORT || 3001;
 
 app.use((req, res, next) => { // Faz a liperação do cors, de endereços diferentes.
   res.header("Access-Control-Allow-Origin", ["http://localhost:3000"])

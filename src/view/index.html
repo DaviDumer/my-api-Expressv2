@@ -70,33 +70,41 @@
   </main>
 </body>
 <script>
-  document.getElementById('button').onclick = () => {
-    fetch('http://localhost:3001/users').then((response) => {
-      response.json().then(usersList => {
-        document.getElementById('table').innerHTML = (`
-        <table border="1">
-            <tr>
-                <td>ID</td>
-                <td>Nome</td>
-                <td>Nome de Usuario</td>
-                <td>Senha: </td>
-            </tr>
-            ${usersList.map((item) => {
-          return `
-            <tr>
-              <td>${item.id}</td>
-              <td>${item.nome}</td>
-              <td>${item.userName}</td>
-              <td>${item.password}</td>
-            </tr>
-          `
+  var api = ["https://my-api-express.herokuapp.com", "http://localhost:3001"]
+  async function Lista(tentativa) {
+    await fetch( api[tentativa].concat("/users") ).then((response) => {
+        response.json().then(usersList => {
+          document.getElementById('table').innerHTML = (`
+          <table border="1">
+              <tr>
+                  <td>ID</td>
+                  <td>Nome</td>
+                  <td>Nome de Usuario</td>
+                  <td>Senha: </td>
+              </tr>
+              ${usersList.map((item) => {
+            return `
+              <tr>
+                <td>${item.id}</td>
+                <td>${item.nome}</td>
+                <td>${item.userName}</td>
+                <td>${item.password}</td>
+              </tr>
+            `
+          })
+            }
+          </table>
+          `);
         })
-          }
-        </table>
-        `);
       })
-    })
   }
+  document.querySelector('#button').onclick = async () => {
+    try {
+      await Lista(0)
+    } catch {
+      await Lista(1)
+    }
+    }
 </script>
 
 </html>
